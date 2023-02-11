@@ -11,7 +11,7 @@ function Flow() {
   const Settings = useMemo(
     () =>
       selectedNodeUrl
-        ? lazy(() => import(`../nodes/${selectedNodeUrl}/frontend/Settings.tsx`))
+        ? lazy(() => import(`../nodes/${selectedNodeUrl}/Settings.tsx`))
         : undefined,
     [selectedNodeUrl]
   )
