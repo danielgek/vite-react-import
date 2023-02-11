@@ -1,13 +1,13 @@
-import { ChangeEvent, lazy, Suspense, useMemo, useState } from 'react';
-import reactLogo from './assets/react.svg';
-import './App.css';
+import { ChangeEvent, lazy, Suspense, useMemo, useState } from 'react'
+import reactLogo from './assets/react.svg'
+import './App.css'
 
-import metadata from './nodes/metadata.json';
+import metadata from './nodes/metadata.json'
 
 function App() {
   const [selectedNodeUrl, selectedNodUrl] = useState<string>(
     metadata.nodes[0].url || ''
-  );
+  )
 
   const Settings = useMemo(
     () =>
@@ -15,11 +15,11 @@ function App() {
         ? lazy(() => import(`./nodes/${selectedNodeUrl}.tsx`))
         : undefined,
     [selectedNodeUrl]
-  );
+  )
 
   const onChange = (ev: ChangeEvent<HTMLSelectElement>) => {
-    selectedNodUrl(ev.currentTarget.value);
-  };
+    selectedNodUrl(ev.currentTarget.value)
+  }
 
   return (
     <div>
@@ -34,7 +34,7 @@ function App() {
       {selectedNodeUrl}
       <Suspense fallback={'loading ....'}>{Settings && <Settings />}</Suspense>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
