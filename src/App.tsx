@@ -5,27 +5,34 @@ import './App.css'
 import metadata from './nodes/metadata.json'
 
 function App() {
-  const [selectedNodeUrl, selectedNodUrl] = useState<string>();
+  const [selectedNodeUrl, selectedNodUrl] = useState<string>(
+    metadata.nodes[0].url || ''
+  )
 
   const Settings = useMemo(
-    () => (selectedNodeUrl ? lazy(() => import(`./${selectedNodeUrl}`)) : undefined),
-    [selectedNodeUrl],
-  );
+    () =>
+      selectedNodeUrl
+        ? lazy(() => import(`./nodes/${selectedNodeUrl}.tsx`))
+        : undefined,
+    [selectedNodeUrl]
+  )
 
   const onChange = (ev: ChangeEvent<HTMLSelectElement>) => {
     selectedNodUrl(ev.currentTarget.value)
-  };
+  }
 
   return (
     <div>
-      SelectedNode: 
+      SelectedNode:
       <select onChange={onChange}>
-        {metadata.nodes.map(node => (<option key={node.url} value={node.url}>{node.title}</option>))}
+        {metadata.nodes.map((node) => (
+          <option key={node.url} value={node.url}>
+            {node.title}
+          </option>
+        ))}
       </select>
       {selectedNodeUrl}
-      <Suspense fallback={'loading ....'}>
-        {Settings && <Settings />}
-      </Suspense>
+      <Suspense fallback={'loading ....'}>{Settings && <Settings />}</Suspense>
     </div>
   )
 }

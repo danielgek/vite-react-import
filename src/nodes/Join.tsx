@@ -1,12 +1,5 @@
-
-
 function Join() {
-
-  return (
-    <div>
-      Join
-    </div>
-  )
+  return <div>Join</div>
 }
 
 export default Join
