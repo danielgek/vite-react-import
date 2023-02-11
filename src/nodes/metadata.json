@@ -2,11 +2,11 @@
   "nodes": [
     {
       "title": "Join",
-      "url": "Join"
+      "url": "join"
     },
     {
       "title": "Filter",
-      "url": "Filter"
+      "url": "filter"
     }
   ]
 }
