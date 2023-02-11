@@ -5,10 +5,10 @@ import "./App.css";
 import metadata from "./nodes/metadata.json";
 
 function App() {
-  const [selectedNodeUrl, selectedNodUrl] = useState<string>();
+  const [selectedNodeUrl, selectedNodUrl] = useState<string>(metadata.nodes[0].url || "");
 
   const Settings = useMemo(
-    () => (selectedNodeUrl ? lazy(() => import(`./${selectedNodeUrl}`)) : undefined),
+    () => (selectedNodeUrl ? lazy(() => import(`./nodes/${selectedNodeUrl}.tsx`)) : undefined),
     [selectedNodeUrl]
   );
 
