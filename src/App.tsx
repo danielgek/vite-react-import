@@ -1,33 +1,35 @@
-import { ChangeEvent, lazy, Suspense, useMemo, useState } from 'react'
-import reactLogo from './assets/react.svg'
-import './App.css'
+import { ChangeEvent, lazy, Suspense, useMemo, useState } from "react";
+import reactLogo from "./assets/react.svg";
+import "./App.css";
 
-import metadata from './nodes/metadata.json'
+import metadata from "./nodes/metadata.json";
 
 function App() {
   const [selectedNodeUrl, selectedNodUrl] = useState<string>();
 
   const Settings = useMemo(
     () => (selectedNodeUrl ? lazy(() => import(`./${selectedNodeUrl}`)) : undefined),
-    [selectedNodeUrl],
+    [selectedNodeUrl]
   );
 
   const onChange = (ev: ChangeEvent<HTMLSelectElement>) => {
-    selectedNodUrl(ev.currentTarget.value)
+    selectedNodUrl(ev.currentTarget.value);
   };
 
   return (
     <div>
-      SelectedNode: 
+      SelectedNode:
       <select onChange={onChange}>
-        {metadata.nodes.map(node => (<option key={node.url} value={node.url}>{node.title}</option>))}
+        {metadata.nodes.map((node) => (
+          <option key={node.url} value={node.url}>
+            {node.title}
+          </option>
+        ))}
       </select>
       {selectedNodeUrl}
-      <Suspense fallback={'loading ....'}>
-        {Settings && <Settings />}
-      </Suspense>
+      <Suspense fallback={"loading ...."}>{Settings && <Settings />}</Suspense>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
